@@ -1,0 +1,10 @@
+{
+  "typescript.svg": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Typescript.svg",
+  "react.png": "https://react.dev/favicon-32x32.png",
+  "nextdotjs.ico": "https://nextjs.org/favicon.ico",
+  "tailwindcss.svg": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg",
+  "python.png": "https://www.python.org/static/opengraph-icon-200x200.png",
+  "fastapi.png": "https://fastapi.tiangolo.com/img/favicon.png",
+  "cplusplus.svg": "https://raw.githubusercontent.com/isocpp/logos/master/cpp_logo.svg",
+  "go.svg": "https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_Blue.svg"
+}
