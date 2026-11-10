@@ -435,6 +435,14 @@ nav button.active {
   object-fit: cover;
 }
 
+#discordAvatar {
+  background: #242424;
+}
+
+#discordAvatar img[hidden] {
+  display: none;
+}
+
 .avatar-decoration {
   position: absolute;
   inset: -10%;
@@ -704,6 +712,103 @@ nav button.active {
   border-left: 0;
 }
 
+.prod-entry {
+  transition: background .25s;
+}
+
+.prod-entry.active {
+  background: #202020;
+}
+
+.prod-entry > button {
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font-family: inherit;
+}
+
+.prod-entry > button:focus-visible {
+  outline-offset: -3px;
+}
+
+.prod-result {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prod-chevron {
+  width: 12px;
+  height: 12px;
+  color: #888;
+  transition: transform .35s var(--ease);
+}
+
+.prod-entry.active .prod-chevron {
+  transform: rotate(180deg);
+}
+
+.prod-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  opacity: 0;
+  transition: grid-template-rows .45s var(--ease), opacity .2s, visibility .45s;
+}
+
+.prod-entry.active .prod-panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  opacity: 1;
+}
+
+.prod-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.prod-project {
+  padding: 0 20px 18px;
+}
+
+.prod-project-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 2px 0 10px;
+}
+
+.prod-project-heading img {
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+  object-fit: contain;
+}
+
+.prod-project-heading img.brandradar-logo {
+  padding: 4px;
+  background: #eeffe1;
+  border-radius: 8px;
+}
+
+.prod-project-heading strong {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.prod-project p {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.prod-project .project-link {
+  min-height: 32px;
+  margin-top: 8px;
+}
+
 .winner .place {
   background: #eee;
   border-color: #eee;
@@ -921,18 +1026,19 @@ nav button.active {
 .project-link {
   margin-top: 13px;
   display: inline-flex;
-  gap: 7px;
+  gap: 3.5px;
   align-items: center;
   max-width: 100%;
   padding-bottom: 3px;
-  border-bottom: 1px solid #777;
+  color: #aaa;
+  transition: color .2s ease;
   font-size: 10px;
   font-weight: 650;
   overflow-wrap: anywhere;
 }
 
 .project-link:hover {
-  border-color: white;
+  color: #fff;
 }
 
 .project-link .icon {
@@ -1096,6 +1202,7 @@ footer {
 .bullet { padding: 12px 20px; font-size: 12px; }
 .bullet.highlight, .bullet.with-icon { display: flex; align-items: flex-start; gap: 12px; }
 .achievement-row.winner { --prize: #e0e6f0; background: #202329; color: #cdd4de; }
+.prod-entry.winner { background: #202329; }
 .winner .place { display: inline-flex; align-items: center; gap: 6px; color: #e0e6f0; background: #343a44; }
 .place .icon { width: 14px; height: 14px; }
 .bullet.highlight { --prize: #e7b084; background: #2a201a; color: #e0c3ad; border-radius: 8px; margin: 0 8px 8px; padding: 12px; }
@@ -1147,6 +1254,7 @@ body:has(#projects.active) .pagination { bottom: 96px; }
   .project-card.active .project-top { padding: 12px; }
   .project-content { top: 68px; left: 12px; right: 12px; }
   .achievement-row { padding: 12px; font-size: 12px; }
+  .prod-project { padding: 0 12px 14px; }
   .card-header, .achievement-side .card-header { padding: 16px 12px; font-size: 13px; }
   .bullet { padding: 12px; font-size: 11px; }
 }
@@ -1164,9 +1272,9 @@ body:has(#projects.active) .pagination { bottom: 96px; }
   .role { font-size: 22px; }
   .subtitle { font-size: 12px; margin-top: 8px; }
   .tech-stack, .socials { justify-content: center; gap: 6px; margin-top: 20px; }
-  .tech-stack { gap: 10px; flex-wrap: nowrap; max-width: 402px; margin-inline: auto; }
+  .tech-stack { gap: 10px; flex-wrap: nowrap; max-width: 414px; margin-inline: auto; }
   .tech-group { gap: 4px; }
-  .tech { width: clamp(22px, calc((100vw - 74px) / 9), 36px); height: auto; aspect-ratio: 1; border-radius: 8px; }
+  .tech { width: clamp(22px, calc((100vw - 78px) / 10), 36px); height: auto; aspect-ratio: 1; border-radius: 8px; }
   .tech img { width: 23px; height: 23px; }
   .tech[data-name="Go"] img { width: min(28px, 90%); }
   .btn { padding-inline: 12px; font-size: 11px; gap: 8px; }
@@ -1178,6 +1286,10 @@ body:has(#projects.active) .pagination { bottom: 96px; }
   .section-description { font-size: 11px; margin-top: 8px; }
   .achievement-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 20px; }
   .achievement-row { padding: 12px 10px; gap: 4px; flex-wrap: wrap; font-size: 11px; }
+  .prod-project { padding: 0 10px 12px; }
+  .prod-project p { font-size: 11px; }
+  .prod-project .project-link { min-height: 44px; }
+  .prod-result { gap: 5px; }
   .achievement-row small { font-size: 10px; }
   .place { font-size: 9px; padding: 4px 6px; }
   .card-header, .achievement-side .card-header { padding: 12px 10px; gap: 8px; font-size: 12px; }
@@ -1355,6 +1467,7 @@ body:has(#projects.active) .pagination { bottom: 96px; }
           <div class="tech-stack reveal delay-2">
             <div class="tech-group">
               <span class="tech" data-name="TypeScript" tabindex="0"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Typescript.svg" alt="TypeScript" width="26" height="26"></span>
+              <span class="tech" data-name="Vite" tabindex="0"><img src="images/stack/vite.webp" alt="Vite" width="26" height="26"></span>
               <span class="tech" data-name="React" tabindex="0"><img src="https://react.dev/favicon-32x32.png" alt="React" width="26" height="26"></span>
               <span class="tech" data-name="Next.js" tabindex="0"><img src="https://nextjs.org/favicon.ico" alt="Next.js" width="26" height="26"></span>
               <span class="tech" data-name="Tailwind CSS" tabindex="0"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Tailwind CSS" width="26" height="26"></span>
@@ -1396,7 +1509,7 @@ body:has(#projects.active) .pagination { bottom: 96px; }
               <div class="discord-profile">
 
                 <div class="avatar-wrap">
-                  <div class="avatar" id="discordAvatar"><img src="images/avatar.png" alt="" width="51" height="51"></div>
+                  <div class="avatar" id="discordAvatar"><img alt="" width="51" height="51" hidden></div>
                   <img class="avatar-decoration" id="discordDecoration" alt="" width="62" height="62" hidden>
                   <span class="presence" id="discordPresence" aria-hidden="true"></span>
                 </div>
@@ -1433,33 +1546,13 @@ body:has(#projects.active) .pagination { bottom: 96px; }
 
         <div class="achievement-grid reveal delay-2">
 
-          <div class="achievement-card">
+          <div class="achievement-card" id="prodAchievements">
             <div class="card-header">
               <img class="achievement-icon" src="images/icons/prod.webp" alt="" width="28" height="28">
               PROD
             </div>
 
-            <div class="achievement-row">
-              <div>
-                <strong>PROD '26</strong>
-              </div>
-              <span class="place">Finalist</span>
-            </div>
-
-            <div class="achievement-row">
-              <div>PROD Hackathon<br><strong>Minsk</strong></div>
-              <span class="place">4th place</span>
-            </div>
-
-            <div class="achievement-row">
-              <div>PROD Hackathon<br><strong>Saint Petersburg</strong></div>
-              <span class="place">6th place</span>
-            </div>
-
-            <div class="achievement-row winner">
-              <div>PROD Hackathon<br><strong>Kazan</strong></div>
-              <span class="place"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg>2nd place</span>
-            </div>
+            <div id="prodProjects"></div>
           </div>
 
           <div class="achievement-card">
@@ -1639,6 +1732,14 @@ const projects = {
       url: "https://shrtl.ru/",
       label: "shrtl.ru",
       icon: "link"
+    },
+    {
+      name: "SpiritLM",
+      logo: "spiritlm.png",
+      description: "A platform for accessing AI models by API or subscribe",
+      url: "https://spiritlm.netlify.app/",
+      label: "spiritlm.netlify.app",
+      icon: "bot"
     }
   ],
   opensource: [
@@ -1686,6 +1787,14 @@ const projects = {
       url: "https://github.com/thekeny/SunCheck",
       label: "github.com/thekeny/SunCheck",
       icon: "sun"
+    },
+    {
+      name: "SpiritCode",
+      logo: "spiritlm.png",
+      description: "A terminal coding agent for SpiritLM with model switching, saved sessions and code change review.",
+      url: "https://pypi.org/project/spiritcode/",
+      label: "pypi.org/project/spiritcode",
+      icon: "code"
     }
   ]
 };
@@ -1758,6 +1867,99 @@ function renderProjects(id, items) {
 
 renderProjects("apps", projects.apps);
 renderProjects("opensource", projects.opensource);
+
+const prodProjects = [
+  {
+    event: "<strong>PROD '26</strong>",
+    place: "Finalist",
+    name: "BrandRadar",
+    logo: "brandradar.png",
+    description: "Brand mention monitoring with sentiment analysis, reputation metrics and real-time alerts.",
+    repo: "Prod2026-BrandRadar"
+  },
+  {
+    event: "PROD Hackathon<br><strong>Minsk</strong>",
+    place: "4th place",
+    name: "MeetPoint",
+    logo: "meetpoint.png",
+    description: "Event networking with participant profiles, contact requests and QR invitations.",
+    repo: "Prodminsk-meetpoint"
+  },
+  {
+    event: "PROD Hackathon<br><strong>Saint Petersburg</strong>",
+    place: "6th place",
+    name: "MoverMate",
+    logo: "movermate.png",
+    description: "A moving planner to organize rooms, boxes, belongings and tasks in one place.",
+    repo: "Prodspb-movermate"
+  },
+  {
+    event: "PROD Hackathon<br><strong>Kazan</strong>",
+    place: "2nd place",
+    name: "TravelHub",
+    logo: "travelhub.png",
+    description: "A shared travel planner with itineraries, maps and trip materials, plus offline access.",
+    repo: "Prodkazan-travelhub",
+    winner: true
+  }
+];
+
+const prodContainer = document.getElementById("prodProjects");
+prodContainer.innerHTML = prodProjects.map((project, index) => `
+  <article class="prod-entry${project.winner ? " winner" : ""}">
+    <button class="achievement-row${project.winner ? " winner" : ""}" type="button"
+      id="prod-trigger-${index}" aria-expanded="false" aria-controls="prod-panel-${index}">
+      <span>${project.event}</span>
+      <span class="prod-result">
+        <span class="place">${project.winner ? '<svg class="icon" aria-hidden="true"><use href="#i-award"/></svg>' : ""}${project.place}</span>
+        <svg class="icon prod-chevron" aria-hidden="true" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </button>
+    <div class="prod-panel" id="prod-panel-${index}" role="region" aria-labelledby="prod-trigger-${index}" inert>
+      <div class="prod-panel-inner">
+        <div class="prod-project">
+          <div class="prod-project-heading">
+            <img class="${project.logo === 'brandradar.png' ? 'brandradar-logo' : ''}" src="images/logos/${project.logo}" alt="" width="36" height="36">
+            <strong>${project.name}</strong>
+          </div>
+          <p>${project.description}</p>
+          <a class="project-link" href="https://github.com/thekeny/${project.repo}" target="_blank" rel="noopener noreferrer"
+            aria-label="${project.name} on GitHub (new tab)">
+            View on GitHub
+            <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+`).join("");
+
+const prodEntries = [...prodContainer.querySelectorAll(".prod-entry")];
+
+function activateProdProject(selected) {
+  prodEntries.forEach(entry => {
+    const expanded = entry === selected;
+    entry.classList.toggle("active", expanded);
+    entry.querySelector("button").setAttribute("aria-expanded", String(expanded));
+    entry.querySelector(".prod-panel").inert = !expanded;
+  });
+}
+
+prodEntries.forEach(entry => {
+  const trigger = entry.querySelector("button");
+  entry.addEventListener("pointerenter", event => {
+    if (event.pointerType === "mouse") activateProdProject(entry);
+  });
+  trigger.addEventListener("click", () => {
+    activateProdProject(entry.classList.contains("active") ? null : entry);
+  });
+  entry.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+    trigger.focus({ preventScroll: true });
+    activateProdProject(null);
+    event.stopPropagation();
+  });
+});
 
 const viewport = document.getElementById("viewport");
 const track = document.getElementById("track");
@@ -1928,6 +2130,10 @@ window.addEventListener("keydown", event => {
 });
 
 function fitScreens() {
+  const prodRowsHeight = prodEntries.reduce((height, entry) => height + Math.ceil(parseFloat(getComputedStyle(entry.querySelector("button")).height)), 0);
+  const prodPanelHeight = Math.max(...prodEntries.map(entry => entry.querySelector(".prod-panel-inner").scrollHeight)) + 1;
+  prodContainer.style.minHeight = `${prodRowsHeight + prodPanelHeight}px`;
+
   slides.forEach(slide => {
     const body = slide.querySelector(".screen-body");
     const style = getComputedStyle(slide);
@@ -1943,6 +2149,9 @@ window.addEventListener("resize", () => {
 window.addEventListener("load", fitScreens);
 document.fonts.ready.then(fitScreens);
 fitScreens();
+
+const prodLayoutObserver = new ResizeObserver(() => fitScreens());
+prodLayoutObserver.observe(document.querySelector("#achievements .screen-body"));
 
 function showToast(message) {
   const element = document.getElementById("toast");
@@ -1986,7 +2195,7 @@ function renderDiscordProfile(user) {
   const avatarSource = user.avatar
     ? `https://cdn.discordapp.com/avatars/${encodeURIComponent(userId)}/${encodeURIComponent(user.avatar)}.${user.avatar.startsWith("a_") ? "gif" : "png"}?size=128`
     : `https://cdn.discordapp.com/embed/avatars/${defaultIndex}.png`;
-  setDiscordImage(avatar, avatarSource, "images/avatar.png");
+  setDiscordImage(avatar, avatarSource);
   const decoration = user.avatar_decoration_data;
   const decorationActive = decoration?.asset && (!decoration.expires_at || Number(decoration.expires_at) * 1000 > Date.now());
   setDiscordImage(document.getElementById("discordDecoration"), decorationActive
