@@ -91,7 +91,7 @@
 .achievement-row.bronze { background: #2a201a; }
 .bronze .place { display: inline-flex; align-items: center; gap: 6px; color: #f2c39f; background: #493226; }
 .project-group { grid-template-columns: 160px minmax(0, 1fr); gap: 24px; margin-top: 24px; }
-.project-row { height: clamp(220px, 24dvh, 280px); gap: 12px; }
+.project-row { height: clamp(220px, 24dvh, 280px); --project-gap: 12px; }
 .project-card { border-radius: 10px; background: var(--project-bg, #131313); }
 .project-card.active { background: var(--project-active-bg, #202020); }
 .project-card:hover { background: var(--project-hover-bg, #191919); }
@@ -127,7 +127,7 @@
   --project-active-hover-bg: #1b2c22;
 }
 .project-top { padding: 16px; }
-.project-card.active .project-top { padding: 20px; }
+.project-details .project-top { padding: 20px; }
 .project-icon { width: 40px; height: 40px; border-radius: 10px; background: transparent; }
 .project-icon img { width: 36px; height: 36px; object-fit: contain; border-radius: 7px; }
 .project-label strong { font-size: 13px; }

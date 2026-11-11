@@ -171,16 +171,18 @@ const projectTones = {
 
 function renderProjects(id, items) {
   const container = document.getElementById(id);
+  container.style.setProperty("--project-count", items.length);
 
   container.innerHTML = items.map((project, index) => `
     <article
       class="project-card ${index === 0 ? "active" : ""}"
       data-tone="${projectTones[project.name] || "neutral"}"
       data-project="${project.name}"
+      aria-label="${project.name}"
       tabindex="0"
       aria-expanded="${index === 0}"
     >
-      <div class="project-top">
+      <div class="project-top" aria-hidden="true">
         <div class="project-icon">
           ${project.logo
             ? `<img src="images/logos/${project.logo}" alt="" width="36" height="36">`
@@ -190,6 +192,15 @@ function renderProjects(id, items) {
           <strong>${project.name}</strong>
         </div>
       </div>
+      <div class="project-details">
+        <div class="project-top">
+          <div class="project-icon">
+            ${project.logo
+              ? `<img src="images/logos/${project.logo}" alt="" width="36" height="36">`
+              : `<svg class="icon" aria-hidden="true"><use href="#i-${project.icon}"></use></svg>`}
+          </div>
+          <div class="project-label"><strong>${project.name}</strong></div>
+        </div>
       <div class="project-content">
         ${renderStack(project.stack)}
         ${project.description ? `<p>${project.description}</p>` : ""}
@@ -203,6 +214,7 @@ function renderProjects(id, items) {
           ${project.label}
           <svg class="icon"><use href="#i-external"></use></svg>
         </a>
+      </div>
       </div>
     </article>
   `).join("");
