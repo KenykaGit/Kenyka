@@ -1,0 +1,330 @@
+.scroll-hint {
+  margin-top: 25px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  color: #707070;
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.scroll-hint .icon {
+  width: 16px;
+  height: 16px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(-3px); }
+  50% { transform: translateY(4px); }
+}
+
+.section-label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #888;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: .18em;
+  font-weight: 650;
+}
+
+.section-title {
+  margin-top: 12px;
+  font-size: clamp(45px, 6vw, 76px);
+  line-height: 1;
+  letter-spacing: -.075em;
+  font-weight: 750;
+}
+
+.section-title span {
+  color: #777;
+}
+
+.section-description {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #858585;
+  line-height: 1.6;
+}
+
+.achievement-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.achievement-card {
+  min-width: 0;
+  background: #121212;
+  border: 0 solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 18px 19px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  border-bottom: 0;
+}
+
+.achievement-row {
+  padding: 17px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  border-bottom: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #c9c9c9;
+}
+
+.achievement-row:last-child {
+  border-bottom: 0;
+}
+
+.achievement-row strong {
+  font-weight: 650;
+  color: white;
+}
+
+.achievement-row small {
+  color: #888;
+  font-size: 10px;
+}
+
+.place {
+  flex-shrink: 0;
+  background: #202020;
+  border: 0 solid #363636;
+  padding: 5px 8px;
+  border-radius: 7px;
+  color: #ccc;
+  font-size: 10px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.achievement-row.winner {
+  background: #1b1b1b;
+  border-left: 0;
+}
+
+.prod-entry {
+  transition: background .25s;
+}
+
+.prod-entry.active {
+  background: #202020;
+}
+
+.prod-entry > button {
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font-family: inherit;
+}
+
+.prod-entry > button:focus-visible {
+  outline-offset: -3px;
+}
+
+.prod-result {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prod-chevron {
+  width: 12px;
+  height: 12px;
+  color: #888;
+  transition: transform .35s var(--ease);
+}
+
+.prod-entry.active .prod-chevron {
+  transform: rotate(180deg);
+}
+
+.prod-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  opacity: 0;
+  transition: grid-template-rows .45s var(--ease), opacity .2s, visibility .45s;
+}
+
+.prod-entry.active .prod-panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  opacity: 1;
+}
+
+.prod-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.prod-project {
+  padding: 0 20px 18px;
+}
+
+.prod-project-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 2px 0 10px;
+}
+
+.prod-project-heading img {
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+  object-fit: contain;
+}
+
+.prod-project-heading img.brandradar-logo {
+  padding: 4px;
+  background: #eeffe1;
+  border-radius: 8px;
+}
+
+.prod-project-heading strong {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.prod-project-icon,
+.prod-project-name {
+  display: inline-grid;
+}
+
+.prod-project-icon {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+}
+
+.prod-project-icon img,
+.prod-project-name > span {
+  grid-area: 1 / 1;
+  transition: opacity 300ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.prod-project-icon .prod-project-hover-image {
+  object-fit: cover;
+}
+
+.prod-project-hover-image,
+.prod-project-hover-name {
+  opacity: 0;
+}
+
+.prod-project-heading:has(.prod-project-icon:hover) .prod-project-default-image,
+.prod-project-heading:has(.prod-project-icon:hover) .prod-project-default-name {
+  opacity: 0;
+}
+
+.prod-project-heading:has(.prod-project-icon:hover) .prod-project-hover-image,
+.prod-project-heading:has(.prod-project-icon:hover) .prod-project-hover-name {
+  opacity: 1;
+}
+
+.meimei-rain {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.meimei-rain img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+}
+
+.prod-project p {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.prod-project .project-link {
+  min-height: 32px;
+  margin-top: 8px;
+}
+
+.winner .place {
+  background: #eee;
+  border-color: #eee;
+  color: #111;
+}
+
+.achievement-side {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+}
+
+.achievement-side .card-header {
+  padding: 15px 18px;
+}
+
+.bullet {
+  padding: 12px 18px;
+  color: #c9c9c9;
+  border-bottom: 0;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.bullet:last-child {
+  border: none;
+}
+
+.bullet strong {
+  color: white;
+}
+
+.bullet.highlight {
+  border-left: 0;
+}
+
+.achievement-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+  font-size: 10px;
+  color: #777;
+  gap: 15px;
+}
+
+.text-button {
+  border: 0;
+  background: transparent;
+  color: #ddd;
+  font-size: 11px;
+}
+
+.text-button:hover {
+  color: white;
+}
+

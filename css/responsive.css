@@ -1,0 +1,118 @@
+@media (min-width: 1800px) {
+  .slide { padding-inline: 32px; }
+  header { padding-inline: 32px; }
+  .achievement-row { padding-block: 24px; font-size: 15px; }
+  .bullet { padding-block: 20px; font-size: 14px; }
+}
+@media (max-width: 1000px) {
+  .hero h1 { font-size: clamp(76px, 12vw, 120px); }
+  .project-group { grid-template-columns: 1fr; gap: 12px; }
+  .group-meta { display: flex; align-items: baseline; gap: 12px; padding: 0; }
+  .group-title { margin: 0; font-size: 22px; }
+  .group-description { margin: 0 0 0 auto; }
+  .project-row { height: 220px; }
+  .project-card.active { flex-grow: 5.5; }
+  .project-top { padding: 12px 8px; }
+  .project-card.active .project-top { padding: 12px; }
+  .project-content { top: 68px; left: 12px; right: 12px; }
+  .achievement-row { padding: 12px; font-size: 12px; }
+  .prod-project { padding: 0 12px 14px; }
+  .card-header, .achievement-side .card-header { padding: 16px 12px; font-size: 13px; }
+  .bullet { padding: 12px; font-size: 11px; }
+}
+@media (max-width: 600px) {
+  header { height: 60px; padding: 0 12px; }
+  .logo { gap: 8px; font-size: 13px; }
+  .logo-icon { width: 28px; height: 28px; }
+  nav { gap: 16px; }
+  nav button { font-size: 11px; min-height: 44px; }
+  nav button:first-child { display: none; }
+  .slide { padding: 72px 12px 40px; }
+  .hero { gap: 20px; }
+  .hero-heading { gap: 16px; margin: 16px 0; }
+  .hero h1 { font-size: clamp(56px, 16vw, 88px); margin: 0; }
+  .role { font-size: 22px; }
+  .subtitle { font-size: 12px; margin-top: 8px; }
+  .tech-stack, .socials { justify-content: center; gap: 6px; margin-top: 20px; }
+  .tech-stack { gap: 10px; flex-wrap: nowrap; max-width: 414px; margin-inline: auto; }
+  .tech-group { gap: 4px; }
+  .tech { width: clamp(22px, calc((100vw - 78px) / 10), 36px); height: auto; aspect-ratio: 1; border-radius: 8px; }
+  .tech img { width: 23px; height: 23px; }
+  .tech[data-name="Go"] img { width: min(28px, 90%); }
+  .btn { padding-inline: 12px; font-size: 11px; gap: 8px; }
+  .hero-avatar { width: clamp(56px, 16vw, 72px); border-radius: 50%; }
+  .discord-card { margin-top: 0; max-width: 430px; margin-inline: auto; }
+  .discord-banner { height: 36px; }
+  .scroll-hint { margin-top: 0; }
+  .section-title { font-size: 48px; margin-top: 8px; }
+  .section-description { font-size: 11px; margin-top: 8px; }
+  .achievement-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 20px; }
+  .achievement-row { padding: 12px 10px; gap: 4px; flex-wrap: wrap; font-size: 11px; }
+  .prod-project { padding: 0 10px 12px; }
+  .prod-project p { font-size: 11px; }
+  .prod-project .project-link { min-height: 44px; }
+  .prod-result { gap: 5px; }
+  .achievement-row small { font-size: 10px; }
+  .place { font-size: 9px; padding: 4px 6px; }
+  .card-header, .achievement-side .card-header { padding: 12px 10px; gap: 8px; font-size: 12px; }
+  .achievement-icon { width: 24px; height: 24px; }
+  .achievement-side { grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; gap: 8px; }
+  .bullet { font-size: 10px; padding: 8px 10px; }
+  .bullet.highlight, .bullet.with-icon { gap: 6px; }
+  .bullet .achievement-icon { width: 20px; height: 20px; }
+  .bullet.highlight { margin-inline: 4px; padding: 8px 6px; }
+  .achievement-foot { margin-top: 16px; font-size: 9px; }
+  .project-group { margin-top: 16px; gap: 8px; }
+  .group-title { font-size: 18px; }
+  .group-number { font-size: 9px; }
+  .group-description { font-size: 9px; }
+  .project-row { height: 236px; gap: 4px; }
+  .project-card.active { flex-grow: 9; }
+  .project-card:not(.active) .project-top { padding: 12px 2px; align-items: center; }
+  .project-card:not(.active) .project-label { writing-mode: vertical-rl; }
+  .project-card:not(.active) .project-label strong { font-size: 10px; white-space: nowrap; overflow-wrap: normal; }
+  .project-card:not(.active) .project-icon, .project-card:not(.active) .project-icon img { width: 22px; height: 22px; }
+  .project-card.active .project-top { padding: 12px 10px; gap: 8px; }
+  .project-icon, .project-icon img { width: 30px; height: 30px; }
+  .project-label strong { font-size: 12px; }
+  .project-content { top: 60px; left: 10px; right: 10px; }
+  .project-content p { font-size: 10px; line-height: 1.5; }
+  .project-link { font-size: 9px; margin-top: 10px; }
+  footer { margin-top: 16px; align-items: center; }
+  .footer-name { font-size: 28px; }
+  .copyright { font-size: 12px; }
+  #projects { padding-bottom: 88px; }
+  #projects > footer { left: 12px; right: 12px; }
+  body:has(#projects.active) .pagination { bottom: 76px; }
+  .footer-links { gap: 12px; }
+  .footer-links a, .footer-links button { font-size: 10px; }
+}
+@media (max-width: 360px) {
+  .project-row { height: 260px; }
+}
+@media (max-height: 700px) and (min-width: 601px) {
+  header { height: 60px; }
+  .slide { padding-top: 72px; }
+  .hero { gap: 16px; }
+  .hero-heading { margin-block: 12px; }
+  .hero h1 { font-size: clamp(72px, 10vw, 104px); }
+  .hero-avatar { width: 80px; }
+  .tech-stack, .socials { margin-top: 16px; }
+  .section-title { font-size: 52px; }
+  .project-row { height: 220px; }
+  .achievement-grid { margin-top: 20px; }
+  .achievement-row { padding-block: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: .01ms !important;
+  }
+
+  .slide .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

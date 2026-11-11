@@ -1,0 +1,145 @@
+.hero {
+  text-align: center;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 18px 0 10px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  gap: 11px;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 650;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+}
+
+.diamond {
+  width: 6px;
+  height: 6px;
+  border: 0 solid #aaa;
+  transform: rotate(45deg);
+}
+
+.hero h1 {
+  font-size: clamp(78px, 12vw, 148px);
+  font-weight: 790;
+  line-height: 1;
+  letter-spacing: -.095em;
+  margin: 13px 0 17px;
+  padding-right: .09em;
+}
+
+.role {
+  font-size: clamp(19px, 2.2vw, 25px);
+  letter-spacing: -.035em;
+  color: #ddd;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+.tech-stack {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 29px;
+}
+
+.tech {
+  width: 43px;
+  height: 43px;
+  border: 0 solid #303030;
+  border-radius: 12px;
+  background: #131313;
+  display: grid;
+  place-items: center;
+  position: relative;
+  transition: transform .25s, border-color .25s;
+}
+
+.tech:hover {
+  transform: translateY(-4px);
+  border-color: #aaa;
+}
+
+.tech svg {
+  width: 25px;
+  height: 25px;
+}
+
+.tech::after {
+  content: attr(data-name);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translate(-50%, 5px);
+  background: #222;
+  border: 0 solid #444;
+  border-radius: 6px;
+  padding: 6px 9px;
+  color: white;
+  font-size: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: .2s;
+}
+
+.tech:hover::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 27px;
+}
+
+.btn {
+  height: 42px;
+  padding: 0 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 12px;
+  border: 0 solid #363636;
+  background: #171717;
+  color: #eee;
+  font-size: 12px;
+  font-weight: 600;
+  transition: transform .25s, background .25s, border-color .25s;
+}
+
+.btn:hover {
+  background: #242424;
+  border-color: #777;
+  transform: translateY(-3px);
+}
+
+.btn .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.btn.primary {
+  color: #101010;
+  background: #f1f1f1;
+  border-color: #f1f1f1;
+}
+
+.btn.primary:hover {
+  background: white;
+}
+
