@@ -1,0 +1,154 @@
+﻿html,
+body {
+  height: auto;
+  min-height: 100%;
+  overflow: auto;
+  background: var(--bg);
+}
+
+.error-header {
+  padding: 22px clamp(24px, 4vw, 64px);
+}
+
+.error-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -.04em;
+}
+
+.error-brand img {
+  border-radius: 9px;
+}
+
+.error-page {
+  min-height: calc(100svh - 88px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 24px 100px;
+  text-align: center;
+}
+
+.error-scene {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: min(100%, 920px);
+  aspect-ratio: 2 / 1;
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+
+.error-scene h1 {
+  padding-right: .09em;
+  color: #242424;
+  opacity: .50;
+  font-size: clamp(144px, 40vw, 440px);
+  font-weight: 800;
+  line-height: .85;
+  letter-spacing: -.09em;
+  user-select: none;
+}
+
+.error-art {
+  position: absolute;
+  bottom: -3%;
+  left: 25%;
+  width: 50%;
+  transform: rotate(-3deg);
+}
+
+.error-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.error-page h2 {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+
+.home-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  margin-top: 28px;
+  padding: 13px 22px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: #151515;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color .18s, transform .18s;
+}
+
+.home-link svg {
+  flex-shrink: 0;
+  transition: transform .18s;
+}
+
+@media (hover: hover) {
+  .home-link:hover {
+    background: #242424;
+  }
+
+  .home-link:hover svg {
+    transform: translateX(-3px);
+  }
+}
+
+.home-link:active {
+  transform: scale(.96);
+}
+
+@media (max-width: 480px) {
+  .error-page {
+    padding-inline: 16px;
+    padding-bottom: 88px;
+  }
+
+  .error-scene {
+    aspect-ratio: 1.5 / 1;
+  }
+
+  .error-art {
+    bottom: 0;
+    left: 15%;
+    width: 70%;
+  }
+}
+
+@media (max-height: 600px) and (min-width: 481px) {
+  .error-page {
+    padding-bottom: 32px;
+  }
+
+  .error-scene {
+    width: min(100%, 500px);
+    margin-bottom: 32px;
+  }
+
+  .error-scene h1 {
+    font-size: 240px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-link,
+  .home-link svg {
+    transition: none;
+    transform: none;
+  }
+}
