@@ -98,8 +98,8 @@ const projects = {
       logo: "kvllay.png",
 
       description: "An in-memory key-value store focused on efficient data storage and retrieval.",
-      url: "https://github.com/thekeny/kvllay",
-      label: "github.com/thekeny/kvllay",
+      url: "https://thekeny.github.io/kvllay",
+      label: "thekeny.github.io/kvllay",
       icon: "database"
     },
     {
