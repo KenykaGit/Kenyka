@@ -148,6 +148,7 @@ nav button.active {
   position: relative;
   height: 100dvh;
   overflow: hidden;
+  touch-action: pan-y pinch-zoom;
 }
 
 .track {
@@ -460,8 +461,8 @@ nav button.active {
   position: absolute;
   right: -3px;
   bottom: -2px;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border: 3px solid #141414;
   border-radius: 50%;
   background: #777;
@@ -576,13 +577,6 @@ nav button.active {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.discord-status {
-  flex-shrink: 0;
-  color: #858585;
-  font-size: 10px;
-  white-space: nowrap;
 }
 
 .discord-note {
@@ -798,6 +792,61 @@ nav button.active {
   font-weight: 650;
 }
 
+.prod-project-icon,
+.prod-project-name {
+  display: inline-grid;
+}
+
+.prod-project-icon {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+}
+
+.prod-project-icon img,
+.prod-project-name > span {
+  grid-area: 1 / 1;
+  transition: opacity 300ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.prod-project-icon .prod-project-hover-image {
+  object-fit: cover;
+}
+
+.prod-project-hover-image,
+.prod-project-hover-name {
+  opacity: 0;
+}
+
+.prod-project-heading:has(.prod-project-icon:hover) .prod-project-default-image,
+.prod-project-heading:has(.prod-project-icon:hover) .prod-project-default-name {
+  opacity: 0;
+}
+
+.prod-project-heading:has(.prod-project-icon:hover) .prod-project-hover-image,
+.prod-project-heading:has(.prod-project-icon:hover) .prod-project-hover-name {
+  opacity: 1;
+}
+
+.meimei-rain {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.meimei-rain img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+}
+
 .prod-project p {
   color: #aaa;
   font-size: 12px;
@@ -867,6 +916,11 @@ nav button.active {
 }
 
 .projects-body {
+  transform: none;
+  max-height: var(--available, 100%);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: none;
   padding-top: 8px;
   padding-bottom: 20px;
 }
@@ -1023,6 +1077,32 @@ nav button.active {
   line-height: 1.6;
 }
 
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.stack-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  color: var(--tag-color);
+  background: var(--tag-bg);
+  font-size: 9px;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+.stack-tag img {
+  width: 11px;
+  height: 11px;
+  object-fit: contain;
+}
+
 .project-link {
   margin-top: 13px;
   display: inline-flex;
@@ -1064,7 +1144,7 @@ footer {
 }
 
 .copyright {
-  margin-top: 8px;
+  margin-top: 13px;
   color: #777;
   font-size: 14px;
 }
@@ -1098,6 +1178,7 @@ footer {
   flex-direction: column;
   gap: 18px;
   z-index: 90;
+  transition: bottom .75s var(--ease);
 }
 
 .page-dot {
@@ -1172,6 +1253,9 @@ footer {
 .tech:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
 .btn { border-radius: 8px; height: 44px; }
 .social-icon { object-fit: contain; }
+.social-icon.geometry-dash-icon { object-fit: cover; }
+.hero .socials { column-gap: 24px; }
+.social-group { display: flex; gap: 8px; }
 .btn.primary .social-icon { filter: brightness(0); }
 .hero-profile { width: min(470px, 100%); min-width: 0; }
 .hero-avatar { display: block; flex-shrink: 0; width: clamp(72px, 9vw, 112px); height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
@@ -1180,13 +1264,35 @@ footer {
 .discord-content { padding: 0 20px 20px; }
 .discord-profile { margin-top: 0; }
 .avatar { background: #141414; }
-.presence.online { background: #43b581; }
+.presence.online { background: #23a55a; }
 .presence.idle { background: #f0b232; }
 .presence.dnd { background: #f23f43; }
 .presence.offline, .presence.unknown { background: #747f8d; }
+.presence::after {
+  content: "";
+  position: absolute;
+  background: #141414;
+}
+.presence.idle::after {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  top: -2px;
+  left: -2px;
+}
+.presence.dnd::after {
+  width: 7px;
+  height: 2px;
+  border-radius: 1px;
+  top: 4px;
+  left: 1.5px;
+}
+.presence.offline::after, .presence.unknown::after {
+  inset: 3px;
+  border-radius: 50%;
+}
 .discord-bottom { margin-top: 12px; padding-top: 4px; }
 .discord-note { color: #999; font-size: 10px; }
-.discord-status { color: #aaa; }
 .scroll-hint { margin-top: 0; font-size: 11px; letter-spacing: .02em; text-transform: none; }
 .section-title { font-size: clamp(48px, 6vw, 96px); font-weight: 600; letter-spacing: -.06em; }
 .section-description { color: #aaa; font-size: 13px; }
@@ -1215,11 +1321,41 @@ footer {
 .achievement-row.bronze { background: #2a201a; }
 .bronze .place { display: inline-flex; align-items: center; gap: 6px; color: #f2c39f; background: #493226; }
 .project-group { grid-template-columns: 160px minmax(0, 1fr); gap: 24px; margin-top: 24px; }
-.project-row { height: clamp(180px, 24dvh, 280px); gap: 12px; }
-.project-card { border-radius: 10px; }
-.project-card.active { background: #202020; }
-.project-card:hover { background: #191919; }
-.project-card.active:hover { background: #242424; }
+.project-row { height: clamp(220px, 24dvh, 280px); gap: 12px; }
+.project-card { border-radius: 10px; background: var(--project-bg, #131313); }
+.project-card.active { background: var(--project-active-bg, #202020); }
+.project-card:hover { background: var(--project-hover-bg, #191919); }
+.project-card.active:hover { background: var(--project-active-hover-bg, #242424); }
+.project-card[data-tone="yellow"] {
+  --project-bg: #17160f;
+  --project-hover-bg: #1c1a12;
+  --project-active-bg: #211e15;
+  --project-active-hover-bg: #252218;
+}
+.project-card[data-tone="purple"] {
+  --project-bg: #151119;
+  --project-hover-bg: #1a1520;
+  --project-active-bg: #201a27;
+  --project-active-hover-bg: #241d2c;
+}
+.project-card[data-tone="blue"]:not([data-project="Q.AI"]) {
+  --project-bg: #101619;
+  --project-hover-bg: #131b21;
+  --project-active-bg: #172128;
+  --project-active-hover-bg: #1a252d;
+}
+.project-card[data-tone="pink"] {
+  --project-bg: #191116;
+  --project-hover-bg: #20161c;
+  --project-active-bg: #261a22;
+  --project-active-hover-bg: #2b1e26;
+}
+.project-card[data-tone="green"] {
+  --project-bg: #101813;
+  --project-hover-bg: #142019;
+  --project-active-bg: #18271e;
+  --project-active-hover-bg: #1b2c22;
+}
 .project-top { padding: 16px; }
 .project-card.active .project-top { padding: 20px; }
 .project-icon { width: 40px; height: 40px; border-radius: 10px; background: transparent; }
@@ -1248,7 +1384,7 @@ body:has(#projects.active) .pagination { bottom: 96px; }
   .group-meta { display: flex; align-items: baseline; gap: 12px; padding: 0; }
   .group-title { margin: 0; font-size: 22px; }
   .group-description { margin: 0 0 0 auto; }
-  .project-row { height: 180px; }
+  .project-row { height: 220px; }
   .project-card.active { flex-grow: 5.5; }
   .project-top { padding: 12px 8px; }
   .project-card.active .project-top { padding: 12px; }
@@ -1304,7 +1440,7 @@ body:has(#projects.active) .pagination { bottom: 96px; }
   .group-title { font-size: 18px; }
   .group-number { font-size: 9px; }
   .group-description { font-size: 9px; }
-  .project-row { height: 176px; gap: 4px; }
+  .project-row { height: 236px; gap: 4px; }
   .project-card.active { flex-grow: 9; }
   .project-card:not(.active) .project-top { padding: 12px 2px; align-items: center; }
   .project-card:not(.active) .project-label { writing-mode: vertical-rl; }
@@ -1325,6 +1461,9 @@ body:has(#projects.active) .pagination { bottom: 96px; }
   .footer-links { gap: 12px; }
   .footer-links a, .footer-links button { font-size: 10px; }
 }
+@media (max-width: 360px) {
+  .project-row { height: 260px; }
+}
 @media (max-height: 700px) and (min-width: 601px) {
   header { height: 60px; }
   .slide { padding-top: 72px; }
@@ -1334,7 +1473,7 @@ body:has(#projects.active) .pagination { bottom: 96px; }
   .hero-avatar { width: 80px; }
   .tech-stack, .socials { margin-top: 16px; }
   .section-title { font-size: 52px; }
-  .project-row { height: 172px; }
+  .project-row { height: 220px; }
   .achievement-grid { margin-top: 20px; }
   .achievement-row { padding-block: 12px; }
 }
@@ -1486,6 +1625,7 @@ body:has(#projects.active) .pagination { bottom: 96px; }
           </div>
 
           <div class="socials reveal delay-3">
+            <div class="social-group">
             <a class="btn primary" href="https://github.com/thekeny" target="_blank" rel="noopener noreferrer">
               <img class="social-icon" src="images/icons/github.svg" alt="" width="18" height="18">
               GitHub
@@ -1495,6 +1635,17 @@ body:has(#projects.active) .pagination { bottom: 96px; }
               <img class="social-icon" src="images/icons/telegram.svg" alt="" width="18" height="18">
               Telegram
             </a>
+            </div>
+            <div class="social-group">
+            <a class="btn" href="https://osu.ppy.sh/users/38368874" target="_blank" rel="noopener noreferrer">
+              <img class="social-icon" src="images/logos/osu.webp" alt="" width="18" height="18">
+              osu!
+            </a>
+            <a class="btn" href="https://gdbrowser.com/u/kenyka" target="_blank" rel="noopener noreferrer">
+              <img class="social-icon geometry-dash-icon" src="images/logos/geometrydash.png" alt="" width="18" height="18">
+              Geometry Dash
+            </a>
+            </div>
           </div>
 
           </div>
@@ -1511,7 +1662,7 @@ body:has(#projects.active) .pagination { bottom: 96px; }
                 <div class="avatar-wrap">
                   <div class="avatar" id="discordAvatar"><img alt="" width="51" height="51" hidden></div>
                   <img class="avatar-decoration" id="discordDecoration" alt="" width="62" height="62" hidden>
-                  <span class="presence" id="discordPresence" aria-hidden="true"></span>
+                  <span class="presence unknown" id="discordPresence" role="img" aria-label="Connecting to Discord" title="Connecting to Discord"></span>
                 </div>
 
                 <div class="discord-identity">
@@ -1528,7 +1679,6 @@ body:has(#projects.active) .pagination { bottom: 96px; }
                   <svg class="icon"><use href="#i-activity"/></svg>
                   <span id="discordActivity">Connecting to Discord…</span>
                 </div>
-                <span class="discord-status" id="discordStatus">Connecting</span>
               </div>
             </div>
           </a>
@@ -1565,6 +1715,12 @@ body:has(#projects.active) .pagination { bottom: 96px; }
               <div>
                 DANO Hackathon<br>
                 <strong>Saint Petersburg</strong>
+                <br>
+                <a class="project-link" href="presentation/dano_spring.pdf" target="_blank" rel="noopener noreferrer"
+                  aria-label="DANO Spring presentation (PDF, new tab)">
+                  Presentation
+                  <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+                </a>
               </div>
               <span class="place">21st place</span>
             </div>
@@ -1573,6 +1729,12 @@ body:has(#projects.active) .pagination { bottom: 96px; }
               <div>
                 DANO Hackathon<br>
                 <strong>Saint Petersburg</strong>
+                <br>
+                <a class="project-link" href="presentation/dano_autumn.pdf" target="_blank" rel="noopener noreferrer"
+                  aria-label="DANO Autumn presentation (PDF, new tab)">
+                  Presentation
+                  <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+                </a>
               </div>
               <span class="place">5th place</span>
             </div>
@@ -1647,7 +1809,7 @@ body:has(#projects.active) .pagination { bottom: 96px; }
         <footer class="reveal delay-3">
           <div>
             <div class="footer-name">Kenyka.</div>
-            <div class="copyright">© 2026 Kenyka</div>
+            <div class="copyright">© 2026 Kenyka/ItzKeeni/TheKeny</div>
           </div>
           <div class="footer-links">
             <a href="https://github.com/thekeny" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -1682,6 +1844,7 @@ const projects = {
   apps: [
     {
       name: "Notter",
+      stack: ["Next.js", "TypeScript", "Tailwind CSS", "Python", "FastAPI", "Prisma", "C++", "InAPI"],
       logo: "notter.png",
 
       description: "A streamlined place for notes, ideas, and thoughts, designed for focused writing without unnecessary clutter.",
@@ -1690,7 +1853,8 @@ const projects = {
       icon: "note"
     },
     {
-      name: "Todo Notter",
+      name: "Notter ToDo",
+      stack: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "C++", "InAPI"],
       logo: "todo.png",
 
       description: "An uncluttered to-do workspace for tracking tasks, organizing priorities, and getting things done.",
@@ -1699,7 +1863,8 @@ const projects = {
       icon: "check"
     },
     {
-      name: "Qualsu Cloud",
+      name: "QualCloud",
+      stack: ["Next.js", "TypeScript", "Tailwind CSS", "Python", "FastAPI"],
       logo: "qualcloud.png",
 
       description: "A web-based space for storing, managing, and accessing files through a simple interface.",
@@ -1708,7 +1873,8 @@ const projects = {
       icon: "cloud"
     },
     {
-      name: "QAI",
+      name: "Q.AI",
+      stack: ["Next.js", "TypeScript", "Tailwind CSS", "Python", "FastAPI"],
       logo: "qai.png",
 
       description: "An interface for exploring AI-assisted workflows and interacting with intelligent tools.",
@@ -1718,6 +1884,7 @@ const projects = {
     },
     {
       name: "GDKenyBot",
+      stack: ["Python", "disnake"],
       logo: "gdkenybot.svg",
       description: "Geometry Dash notifications & utilities bot",
       url: "https://bot.thekeny.ru",
@@ -1725,7 +1892,8 @@ const projects = {
       icon: "bot"
     },
     {
-      name: "Shrtl",
+      name: "Shrtl://",
+      stack: ["Next.js", "TypeScript", "Tailwind CSS", "Python", "FastAPI"],
       logo: "shrtl.svg",
 
       description: "A lightweight utility that turns long URLs into short, convenient links for easy sharing.",
@@ -1735,6 +1903,7 @@ const projects = {
     },
     {
       name: "SpiritLM",
+      stack: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma"],
       logo: "spiritlm.png",
       description: "A platform for accessing AI models by API or subscribe",
       url: "https://spiritlm.netlify.app/",
@@ -1745,6 +1914,7 @@ const projects = {
   opensource: [
     {
       name: "InSDL",
+      stack: ["C++"],
       logo: "insdl.png",
 
       description: "A C++ framework built on SDL3, simplifying the creation of cross-platform graphics, games, and interactive applications.",
@@ -1754,6 +1924,7 @@ const projects = {
     },
     {
       name: "InAPI",
+      stack: ["C++"],
       logo: "inapi.png",
 
       description: "A C++ library for building HTTP servers with expressive FastAPI-like route declarations and a developer-friendly API.",
@@ -1763,6 +1934,7 @@ const projects = {
     },
     {
       name: "Kvllay",
+      stack: ["C++"],
       logo: "kvllay.png",
 
       description: "An in-memory key-value store focused on efficient data storage and retrieval.",
@@ -1771,7 +1943,8 @@ const projects = {
       icon: "database"
     },
     {
-      name: "Omi Language",
+      name: "Omi",
+      stack: ["Python"],
       logo: "omi.png",
 
       description: "A programming-language experiment exploring syntax, language design, and developer tooling.",
@@ -1781,6 +1954,7 @@ const projects = {
     },
     {
       name: "SunCheck",
+      stack: ["TypeScript"],
       logo: "suncheck.png",
 
       description: "An interface utility that makes disabled actions explain why they are unavailable, improving user feedback.",
@@ -1789,7 +1963,17 @@ const projects = {
       icon: "sun"
     },
     {
+      name: "MyNixUtils",
+      stack: ["Python"],
+      logo: "nix.webp",
+      description: "A command-line utility (CLI) for simplified management of NixOS configuration and packages.",
+      url: "https://github.com/thekeny/MyNixUtils",
+      label: "github.com/thekeny/MyNixUtils",
+      icon: "code"
+    },
+    {
       name: "SpiritCode",
+      stack: ["Python"],
       logo: "spiritlm.png",
       description: "A terminal coding agent for SpiritLM with model switching, saved sessions and code change review.",
       url: "https://pypi.org/project/spiritcode/",
@@ -1799,12 +1983,40 @@ const projects = {
   ]
 };
 
+const stackStyles = {
+  "Next.js": ["nextdotjs.svg", "#e5e5e5", "#303030"],
+  "TypeScript": ["typescript.svg", "#75b5f5", "#172b40"],
+  "Tailwind CSS": ["tailwindcss.svg", "#50d3ed", "#103039"],
+  "Python": ["python.webp", "#f1d66e", "#332e19"],
+  "FastAPI": ["fastapi2.webp", "#59d3bd", "#13332d"],
+  "Prisma": ["prisma.svg", "#b2cde5", "#26313f"],
+  "C++": ["cplusplus.svg", "#85b5e7", "#1c2d40"],
+  "InAPI": ["../logos/inapi.png", "#77dfa0", "#173b29"],
+  "disnake": ["discord.svg", "#a5adff", "#282b49"]
+};
+
+function renderStack(stack) {
+  return `<div class="project-stack" aria-label="Technology stack">${stack.map(name => {
+    const [icon, color, background] = stackStyles[name];
+    return `<span class="stack-tag" style="--tag-color:${color};--tag-bg:${background}"><img src="images/stack/${icon}" alt="" width="11" height="11">${name}</span>`;
+  }).join("")}</div>`;
+}
+
+const projectTones = {
+  "Notter": "yellow", "Notter ToDo": "yellow", "SunCheck": "yellow",
+  "QualCloud": "purple", "Omi": "purple",
+  "Q.AI": "blue", "Shrtl://": "blue", "Kvllay": "blue", "MyNixUtils": "blue",
+  "InSDL": "pink", "InAPI": "green"
+};
+
 function renderProjects(id, items) {
   const container = document.getElementById(id);
 
   container.innerHTML = items.map((project, index) => `
     <article
       class="project-card ${index === 0 ? "active" : ""}"
+      data-tone="${projectTones[project.name] || "neutral"}"
+      data-project="${project.name}"
       tabindex="0"
       aria-expanded="${index === 0}"
     >
@@ -1819,6 +2031,7 @@ function renderProjects(id, items) {
         </div>
       </div>
       <div class="project-content">
+        ${renderStack(project.stack)}
         ${project.description ? `<p>${project.description}</p>` : ""}
         <a
           class="project-link"
@@ -1875,7 +2088,8 @@ const prodProjects = [
     name: "BrandRadar",
     logo: "brandradar.png",
     description: "Brand mention monitoring with sentiment analysis, reputation metrics and real-time alerts.",
-    repo: "Prod2026-BrandRadar"
+    repo: "Prod2026-BrandRadar",
+    presentation: "brandradar.pdf"
   },
   {
     event: "PROD Hackathon<br><strong>Minsk</strong>",
@@ -1883,7 +2097,8 @@ const prodProjects = [
     name: "MeetPoint",
     logo: "meetpoint.png",
     description: "Event networking with participant profiles, contact requests and QR invitations.",
-    repo: "Prodminsk-meetpoint"
+    repo: "Prodminsk-meetpoint",
+    presentation: "meetpoint.pdf"
   },
   {
     event: "PROD Hackathon<br><strong>Saint Petersburg</strong>",
@@ -1891,15 +2106,19 @@ const prodProjects = [
     name: "MoverMate",
     logo: "movermate.png",
     description: "A moving planner to organize rooms, boxes, belongings and tasks in one place.",
-    repo: "Prodspb-movermate"
+    repo: "Prodspb-movermate",
+    presentation: "movermate.pdf"
   },
   {
     event: "PROD Hackathon<br><strong>Kazan</strong>",
     place: "2nd place",
     name: "TravelHub",
     logo: "travelhub.png",
+    hoverName: "Engine X 🥵",
+    hoverLogo: "images/meimei.jpg",
     description: "A shared travel planner with itineraries, maps and trip materials, plus offline access.",
     repo: "Prodkazan-travelhub",
+    presentation: "travelhub.pdf",
     winner: true
   }
 ];
@@ -1919,13 +2138,29 @@ prodContainer.innerHTML = prodProjects.map((project, index) => `
       <div class="prod-panel-inner">
         <div class="prod-project">
           <div class="prod-project-heading">
-            <img class="${project.logo === 'brandradar.png' ? 'brandradar-logo' : ''}" src="images/logos/${project.logo}" alt="" width="36" height="36">
-            <strong>${project.name}</strong>
+            ${project.hoverLogo ? `
+              <button class="prod-project-icon" type="button" aria-label="Make it rain Meimei">
+                <img class="prod-project-default-image" src="images/logos/${project.logo}" alt="" width="36" height="36">
+                <img class="prod-project-hover-image" src="${project.hoverLogo}" alt="" width="36" height="36">
+              </button>
+              <strong class="prod-project-name">
+                <span class="prod-project-default-name">${project.name}</span>
+                <span class="prod-project-hover-name" aria-hidden="true">${project.hoverName}</span>
+              </strong>
+            ` : `
+              <img class="${project.logo === 'brandradar.png' ? 'brandradar-logo' : ''}" src="images/logos/${project.logo}" alt="" width="36" height="36">
+              <strong>${project.name}</strong>
+            `}
           </div>
           <p>${project.description}</p>
           <a class="project-link" href="https://github.com/thekeny/${project.repo}" target="_blank" rel="noopener noreferrer"
             aria-label="${project.name} on GitHub (new tab)">
             View on GitHub
+            <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+          </a>
+          <a class="project-link" href="presentation/${project.presentation}" target="_blank" rel="noopener noreferrer"
+            aria-label="${project.name} presentation (PDF, new tab)">
+            Presentation
             <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
           </a>
         </div>
@@ -1974,6 +2209,89 @@ let touchStart = null;
 let toastTimeout = null;
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+let stopMeimeiRain = null;
+
+function startMeimeiRain() {
+  stopMeimeiRain?.();
+  if (reduceMotion.matches) return;
+
+  const layer = document.createElement("div");
+  layer.className = "meimei-rain";
+  layer.setAttribute("aria-hidden", "true");
+  document.body.append(layer);
+
+  const particles = [];
+  const started = performance.now();
+  let previous = started;
+  let nextSpawn = 0;
+  let frame;
+  const cleanup = () => {
+    cancelAnimationFrame(frame);
+    clearTimeout(timeout);
+    layer.remove();
+    stopMeimeiRain = null;
+  };
+  const timeout = setTimeout(cleanup, 10000);
+  stopMeimeiRain = cleanup;
+
+  function animate(now) {
+    const elapsed = (now - started) / 1000;
+    if (elapsed >= 10 || reduceMotion.matches) {
+      cleanup();
+      return;
+    }
+    const dt = Math.min((now - previous) / 1000, 0.035);
+    previous = now;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    if (elapsed >= nextSpawn && elapsed < 7 && particles.length < 42) {
+      const size = 38 + Math.random() * 34;
+      const image = document.createElement("img");
+      image.src = "images/meimei_drop.png";
+      image.alt = "";
+      image.draggable = false;
+      image.width = size;
+      image.height = size;
+      layer.append(image);
+      particles.push({
+        image, size,
+        x: Math.random() * Math.max(0, width - size),
+        y: -size * 1.5,
+        vx: (Math.random() - 0.5) * 220,
+        vy: 40 + Math.random() * 120,
+        angle: (Math.random() - 0.5) * 40,
+        spin: (Math.random() - 0.5) * 180
+      });
+      nextSpawn = elapsed + 0.16;
+    }
+
+    for (const particle of particles) {
+      particle.vy += 1200 * dt;
+      particle.x += particle.vx * dt;
+      particle.y += particle.vy * dt;
+      particle.angle += particle.spin * dt;
+      const floor = Math.max(0, height - particle.size);
+      const right = Math.max(0, width - particle.size);
+      if (elapsed < 8 && particle.y >= floor && particle.vy > 0) {
+        particle.y = floor;
+        particle.vy = -Math.max(340 + Math.random() * 220, particle.vy * 0.72);
+        particle.spin *= -0.85;
+      }
+      if ((particle.x < 0 && particle.vx < 0) || (particle.x > right && particle.vx > 0)) {
+        particle.x = Math.max(0, Math.min(right, particle.x));
+        particle.vx *= -1;
+      }
+      particle.image.style.transform = `translate3d(${particle.x}px, ${particle.y}px, 0) rotate(${particle.angle}deg)`;
+    }
+    frame = requestAnimationFrame(animate);
+  }
+
+  frame = requestAnimationFrame(animate);
+}
+
+prodContainer.querySelector(".prod-project-icon")?.addEventListener("click", startMeimeiRain);
 
 function updatePosition(instant = false) {
   if (instant || reduceMotion.matches) {
@@ -2030,6 +2348,13 @@ navButtons.forEach(button => {
 window.addEventListener("wheel", event => {
   if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
 
+  const content = slides[currentSlide].querySelector(".screen-body");
+  if (content && /^(auto|scroll)$/.test(getComputedStyle(content).overflowY)) {
+    const maxScroll = content.scrollHeight - content.clientHeight;
+    if ((event.deltaY > 0 && content.scrollTop < maxScroll - 3) ||
+        (event.deltaY < 0 && content.scrollTop > 3)) return;
+  }
+
   event.preventDefault();
 
   const multiplier = event.deltaMode === 1
@@ -2067,12 +2392,13 @@ viewport.addEventListener("touchstart", event => {
 
   const touch = event.touches[0];
   const content = slides[currentSlide].querySelector(".screen-body");
+  const canScrollContent = content && /^(auto|scroll)$/.test(getComputedStyle(content).overflowY);
 
   touchStart = {
     x: touch.clientX,
     y: touch.clientY,
     scrollTop: content?.scrollTop || 0,
-    maxScroll: content
+    maxScroll: canScrollContent
       ? Math.max(0, content.scrollHeight - content.clientHeight)
       : 0
   };
@@ -2138,6 +2464,10 @@ function fitScreens() {
     const body = slide.querySelector(".screen-body");
     const style = getComputedStyle(slide);
     const available = slide.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+    if (slide.id === "projects") {
+      body.style.setProperty("--available", `${available}px`);
+      return;
+    }
     body.style.setProperty("--fit", Math.min(1, available / Math.max(1, body.scrollHeight)));
   });
 }
@@ -2263,9 +2593,15 @@ function renderDiscordProfile(user) {
 let discordRequest = null;
 let discordUpdatedAt = 0;
 
+function setDiscordPresence(status, label) {
+  const presence = document.getElementById("discordPresence");
+  presence.className = "presence " + status;
+  presence.setAttribute("aria-label", label);
+  presence.title = label;
+}
+
 function unavailableDiscord(message) {
-  document.getElementById("discordPresence").className = "presence unknown";
-  document.getElementById("discordStatus").textContent = "Unavailable";
+  setDiscordPresence("unknown", "Live status unavailable");
   const customStatus = document.getElementById("discordCustomStatus");
   customStatus.textContent = "";
   customStatus.hidden = true;
@@ -2301,8 +2637,7 @@ async function updateDiscord() {
     const status = Object.hasOwn(labels, data.discord_status) ? data.discord_status : "unknown";
     document.getElementById("discordName").textContent = user.global_name || user.username || "Kenyka";
     document.getElementById("discordUsername").textContent = user.username ? "@" + user.username : "Discord";
-    document.getElementById("discordPresence").className = "presence " + status;
-    document.getElementById("discordStatus").textContent = labels[status] || "Unknown";
+    setDiscordPresence(status, labels[status] || "Unknown");
     const activities = data.activities || [];
     const custom = activities.find(item => item.type === 4);
     const customStatus = document.getElementById("discordCustomStatus");
