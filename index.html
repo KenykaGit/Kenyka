@@ -276,9 +276,35 @@
                 <img class="achievement-icon" src="images/icons/yandex_liceum.png" alt="" width="28" height="28">
                 Yandex Lyceum
               </div>
-              <div class="bullet">
-                Studying <strong>Industrial Programming in Python</strong>.
-              </div>
+              <article class="prod-entry sayte-entry">
+                <button class="bullet lyceum-trigger" type="button" id="sayte-trigger"
+                  aria-expanded="false" aria-controls="sayte-panel">
+                  <span>Studying <strong>Industrial Programming in Python</strong>.</span>
+                  <svg class="icon prod-chevron" aria-hidden="true" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="prod-panel" id="sayte-panel" role="region" aria-labelledby="sayte-trigger" inert>
+                  <div class="prod-panel-inner">
+                    <div class="prod-project">
+                      <div class="prod-project-heading sayte-heading">
+                        <img src="images/logos/sayte.png" alt="" width="36" height="36">
+                        <strong>Sayte</strong>
+                        <span class="project-tech-tag">PyQT Project</span>
+                      </div>
+                      <p>Voice notes with local transcription and AI editing.</p>
+                      <a class="project-link" href="https://github.com/thekeny/Sayte" target="_blank" rel="noopener noreferrer"
+                        aria-label="Sayte on GitHub (new tab)">
+                        GitHub
+                        <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+                      </a>
+                      <a class="project-link" href="presentation/sayte.pdf" target="_blank" rel="noopener noreferrer"
+                        aria-label="Sayte presentation (PDF, new tab)">
+                        Presentation
+                        <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
               <div class="bullet">
                 Completed the self-paced <strong>Go course</strong> (Go-1, Go-2, Go-3).
               </div>

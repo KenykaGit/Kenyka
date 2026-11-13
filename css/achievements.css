@@ -205,6 +205,51 @@
   font-weight: 650;
 }
 
+.lyceum-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lyceum-trigger .prod-chevron {
+  flex-shrink: 0;
+}
+
+.sayte-heading {
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.sayte-heading img {
+  width: 28px;
+  height: 28px;
+}
+
+.sayte-entry .prod-project {
+  padding-bottom: 8px;
+}
+
+.sayte-entry .prod-project p {
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.sayte-entry .project-link {
+  margin-top: 4px;
+}
+
+.project-tech-tag {
+  padding: 3px 6px;
+  border-radius: 5px;
+  background: #173b29;
+  color: #77dfa0;
+  font-size: 10px;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
 .prod-project-icon,
 .prod-project-name {
   display: inline-grid;

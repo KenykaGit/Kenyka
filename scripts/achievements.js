@@ -89,9 +89,10 @@ prodContainer.innerHTML = prodProjects.map((project, index) => `
 `).join("");
 
 const prodEntries = [...prodContainer.querySelectorAll(".prod-entry")];
+const achievementEntries = [...document.querySelectorAll(".prod-entry")];
 
 function activateProdProject(selected) {
-  prodEntries.forEach(entry => {
+  achievementEntries.forEach(entry => {
     const expanded = entry === selected;
     entry.classList.toggle("active", expanded);
     entry.querySelector("button").setAttribute("aria-expanded", String(expanded));
@@ -99,7 +100,7 @@ function activateProdProject(selected) {
   });
 }
 
-prodEntries.forEach(entry => {
+achievementEntries.forEach(entry => {
   const trigger = entry.querySelector("button");
   entry.addEventListener("pointerenter", event => {
     if (event.pointerType === "mouse") activateProdProject(entry);

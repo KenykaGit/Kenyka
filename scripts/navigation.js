@@ -264,6 +264,16 @@ function fitScreens() {
   const prodPanelHeight = Math.max(...prodEntries.map(entry => entry.querySelector(".prod-panel-inner").scrollHeight)) + 1;
   prodContainer.style.minHeight = `${prodRowsHeight + prodPanelHeight}px`;
 
+  // Reserve space at the bottom of the card, as with PROD, keeping closed rows adjacent.
+  const lyceumEntry = document.querySelector(".sayte-entry");
+  const lyceumCard = lyceumEntry.closest(".achievement-card");
+  const lyceumRowsHeight = [...lyceumCard.children]
+    .filter(child => child !== lyceumEntry)
+    .reduce((height, child) => height + Math.ceil(parseFloat(getComputedStyle(child).height)), 0);
+  const lyceumTriggerHeight = Math.ceil(parseFloat(getComputedStyle(lyceumEntry.querySelector("button")).height));
+  const lyceumPanelHeight = lyceumEntry.querySelector(".prod-panel-inner").scrollHeight;
+  lyceumCard.style.minHeight = `${lyceumRowsHeight + lyceumTriggerHeight + lyceumPanelHeight + 1}px`;
+
   slides.forEach(slide => {
     const body = slide.querySelector(".screen-body");
     const style = getComputedStyle(slide);
