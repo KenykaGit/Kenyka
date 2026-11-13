@@ -47,6 +47,7 @@
 
 .tech-stack {
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 9px;
   flex-wrap: wrap;
@@ -96,6 +97,40 @@
 .tech:hover::after {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+
+.ai-agents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 16px;
+  font-size: 12px;
+}
+
+.tool-label {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.ai-agents-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-agents-list img {
+  border-radius: 4px;
+}
+
+html:not([data-theme="claude"]) .ai-agents-list [data-name="OpenCode"] img {
+  filter: invert(1);
 }
 
 .socials {
