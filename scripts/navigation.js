@@ -149,15 +149,22 @@ navButtons.forEach(button => {
   });
 });
 
+// Nested project details and the section itself can both have scrollable content.
+function scrollableAncestors(target) {
+  const containers = [];
+  for (let element = target; element && element !== viewport; element = element.parentElement) {
+    if (/^(auto|scroll)$/.test(getComputedStyle(element).overflowY) && element.scrollHeight > element.clientHeight + 3) {
+      containers.push({ element, scrollTop: element.scrollTop, maxScroll: element.scrollHeight - element.clientHeight });
+    }
+  }
+  return containers;
+}
+
 window.addEventListener("wheel", event => {
   if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
 
-  const content = slides[currentSlide].querySelector(".screen-body");
-  if (content && /^(auto|scroll)$/.test(getComputedStyle(content).overflowY)) {
-    const maxScroll = content.scrollHeight - content.clientHeight;
-    if ((event.deltaY > 0 && content.scrollTop < maxScroll - 3) ||
-        (event.deltaY < 0 && content.scrollTop > 3)) return;
-  }
+  if (scrollableAncestors(event.target).some(({ scrollTop, maxScroll }) =>
+    event.deltaY > 0 ? scrollTop < maxScroll - 3 : scrollTop > 3)) return;
 
   event.preventDefault();
 
@@ -195,16 +202,10 @@ viewport.addEventListener("touchstart", event => {
   }
 
   const touch = event.touches[0];
-  const content = slides[currentSlide].querySelector(".screen-body");
-  const canScrollContent = content && /^(auto|scroll)$/.test(getComputedStyle(content).overflowY);
-
   touchStart = {
     x: touch.clientX,
     y: touch.clientY,
-    scrollTop: content?.scrollTop || 0,
-    maxScroll: canScrollContent
-      ? Math.max(0, content.scrollHeight - content.clientHeight)
-      : 0
+    containers: scrollableAncestors(event.target)
   };
 }, { passive: true });
 
@@ -223,13 +224,8 @@ viewport.addEventListener("touchend", event => {
 
   const direction = dy < 0 ? 1 : -1;
 
-  if (start.maxScroll > 3) {
-    const canScroll = direction > 0
-      ? start.scrollTop < start.maxScroll - 3
-      : start.scrollTop > 3;
-
-    if (canScroll) return;
-  }
+  if (start.containers.some(({ scrollTop, maxScroll }) =>
+    direction > 0 ? scrollTop < maxScroll - 3 : scrollTop > 3)) return;
 
   if (Date.now() - lastTransition > 500) {
     goTo(currentSlide + direction);
@@ -272,7 +268,9 @@ function fitScreens() {
     .reduce((height, child) => height + Math.ceil(parseFloat(getComputedStyle(child).height)), 0);
   const lyceumTriggerHeight = Math.ceil(parseFloat(getComputedStyle(lyceumEntry.querySelector("button")).height));
   const lyceumPanelHeight = lyceumEntry.querySelector(".prod-panel-inner").scrollHeight;
-  lyceumCard.style.minHeight = `${lyceumRowsHeight + lyceumTriggerHeight + lyceumPanelHeight + 1}px`;
+  const lyceumCardStyle = getComputedStyle(lyceumCard);
+  const lyceumBorderHeight = parseFloat(lyceumCardStyle.borderTopWidth) + parseFloat(lyceumCardStyle.borderBottomWidth);
+  lyceumCard.style.minHeight = `${lyceumRowsHeight + lyceumTriggerHeight + lyceumPanelHeight + lyceumBorderHeight + 1}px`;
 
   slides.forEach(slide => {
     const body = slide.querySelector(".screen-body");

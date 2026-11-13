@@ -6,31 +6,13 @@ body {
   background: var(--bg);
 }
 
-.error-header {
-  padding: 22px clamp(24px, 4vw, 64px);
-}
-
-.error-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 44px;
-  font-size: 15px;
-  font-weight: 750;
-  letter-spacing: -.04em;
-}
-
-.error-brand img {
-  border-radius: 9px;
-}
-
 .error-page {
-  min-height: calc(100svh - 88px);
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px 24px 100px;
+  padding: 100px 24px;
   text-align: center;
 }
 

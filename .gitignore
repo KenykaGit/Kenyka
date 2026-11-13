@@ -1,2 +1,3 @@
 .preview-chrome/
-tests/
+tests/*
+!tests/theme-switching.cjs
